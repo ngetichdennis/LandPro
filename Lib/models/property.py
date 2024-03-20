@@ -52,4 +52,42 @@ class Property:
 
         self.id = CURSOR.lastrowid
         type(self).all[self.id] = self
+        
+    def update(self):
+        """Update the table row corresponding to the current property instance."""
+        sql = """
+            UPDATE properties
+            SET location = ?, area = ?, property_history = ?, owner_id = ?
+            WHERE id = ?
+        """
+        CURSOR.execute(sql, (self.location, self.area,self.property_history,
+                             self.owner_id, self.id))
+        CONN.commit()
+
+    def delete(self):
+        """Delete the table row corresponding to the current propertyinstance,
+        delete the dictionary entry, and reassign id attribute"""
+
+        sql = """
+            DELETE FROM properties
+            WHERE id = ?
+        """
+
+        CURSOR.execute(sql, (self.id,))
+        CONN.commit()
+
+        # Delete the dictionary entry using id as the key
+        del type(self).all[self.id]
+
+        # Set the id to None
+        self.id = None
+
+    @classmethod
+    def create(cls, location, area, property_history, owner_id):
+        """ Initialize a new Employee instance and save the object to the database """
+        property = cls(location, area, property_history, owner_id)
+        property.save()
+        return property
+
+
 
