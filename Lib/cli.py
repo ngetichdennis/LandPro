@@ -1,7 +1,7 @@
-from helper import add_owner, add_property, list_all_owners, list_all_properties, find_owner_by_name,find_property_by_name,find_owner_by_id,find_property_by_id,update_owner, update_property,delete_owner, delete_property
+from helper import add_owner, add_property, list_all_owners, list_all_properties, find_owner_by_name,find_property_by_name,find_owner_by_id,find_property_by_id,update_owner, update_property,delete_owner, delete_property,find_properties_by_owner_name
 
 def display_menu():
-    print("\nWelcome to Property Management System")
+    print("\nWelcome to LandPro,a Property Management System")
     print("1. Add Owner")
     print("2. Add Property")
     print("3. List All Owners")
@@ -14,7 +14,8 @@ def display_menu():
     print("10. Update Properties")
     print("11. Delete Owners")
     print("12. Delete Properties")
-    print("13. Exit")
+    print("13. Find properties owned an owner")
+    print("14. Exit")
 
 def main():
     while True:
@@ -44,7 +45,9 @@ def main():
             delete_owner()
         elif  choice=="12":
             delete_property()
-        elif choice == "13":
+        elif choice=="13":
+            find_properties_by_owner_name()
+        elif choice == "14":
             print("Exiting...")
             break
         else:

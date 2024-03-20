@@ -106,5 +106,22 @@ def delete_property():
         print(f'Property {id_} deleted')
     else:
         print(f'Property {id_} not found')
+        
+def find_properties_by_owner_name():
+    owner_name = input("Enter the owner's name: ")
+    owner = Owner.find_by_name(owner_name)
+    
+    if owner:
+        properties = Property.find_by_owner_id(owner.id)
+        if properties:
+            print(f"Properties owned by {owner_name}:")
+            for prop in properties:
+                print(f"{prop.location}, {prop.area} square meters, Property History: {prop.property_history}")
+        else:
+            print(f"No properties found for {owner_name}.")
+    else:
+        print(f"Owner {owner_name} not found.")
+
+
 
 
