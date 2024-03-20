@@ -37,5 +37,74 @@ def list_all_properties():
         else:
             owner_name = "Unknown Owner"
         print(f"{property.id}: {property.location} {property.area} {property.property_history}  {owner_name}")
+def find_owner_by_name():
+    name = input("Enter the owner's name: ")
+    owner = Owner.find_by_name(name)
+    print(owner) if owner else print(
+        f'Owner {name} not found')
+    
+def find_owner_by_id():
+    # use a trailing underscore not to override the built-in id function
+    id_ = input("Enter the owner's id: ")
+    owner = Owner.find_by_id(id_)
+    print(owner) if owner else print(f'Owner {id_} not found')
+def find_property_by_id():
+    # use a trailing underscore not to override the built-in id function
+    id_ = input("Enter the property's id: ")
+    property = Property.find_by_id(id_)
+    print(property) if property else print(f'Property {id_} not found')
+
+
+def find_property_by_name():
+    name = input("Enter the owner's name: ")
+    owner = Owner.find_by_name(name)
+    print(owner) if owner else print(
+        f'Owner {name} not found')
+def update_owner():
+    id_ = input("Enter the owner's id: ")
+    if owner := Owner.find_by_id(id_):
+        try:
+            name = input("Enter the owner's new name: ")
+            owner.name = name
+            contact = input("Enter the owner's new contact: ")
+            owner.contact = contact
+
+            owner.update()
+            print(f'Success: {owner}')
+        except Exception as exc:
+            print("Error updating owner: ", exc)
+    else:
+        print(f'Owner {id_} not found')
+    
+def update_property():
+    id_ = input("Enter the property's id: ")
+    if property := Property.find_by_id(id_):
+        try:
+            location = input("Enter the property's new name: ")
+            property.location = location
+            area = input("Enter the property's new area: ")
+            property.area = area
+
+            property.update()
+            print(f'Success: {property}')
+        except Exception as exc:
+            print("Error updating property: ", exc)
+    else:
+        print(f'Property {id_} not found')
+def delete_owner():
+    id_ = input("Enter the owner's id: ")
+    if owner := Owner.find_by_id(id_):
+        owner.delete()
+        print(f'Owner {id_} deleted')
+    else:
+        print(f'Owner {id_} not found')
+        
+def delete_property():
+    id_ = input("Enter the property's id: ")
+    if property := Property.find_by_id(id_):
+        property.delete()
+        print(f'Property {id_} deleted')
+    else:
+        print(f'Property {id_} not found')
 
 
