@@ -22,4 +22,20 @@ def add_property():
         print(f'Property added successfully: {new_property}')
     except Exception as exc:
         print("Error creating property: ", exc)
+        
+def list_all_owners():
+    owners = Owner.get_all()
+    for owner in owners:
+        print(f"{owner.id}: {owner.name} {owner.contact} {owner.identification_no}")
+
+def list_all_properties():
+    properties = Property.get_all()
+    for property in properties:
+        owner = Owner.find_by_id(property.owner_id)
+        if owner:
+            owner_name = owner.name
+        else:
+            owner_name = "Unknown Owner"
+        print(f"{property.id}: {property.location} {property.area} {property.property_history}  {owner_name}")
+
 
