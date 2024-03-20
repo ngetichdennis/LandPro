@@ -88,6 +88,63 @@ class Property:
         property = cls(location, area, property_history, owner_id)
         property.save()
         return property
+    
+    
+    @classmethod
+    def instance_from_db(cls, row):
+        """Return an property object having the attribute values from the table row."""
+
+        # Check the dictionary for  existing instance using the row's primary key
+        property = cls.all.get(row[0])
+        if property:
+            # ensure attributes match row values in case local instance was modified
+            property.location = row[1]
+            property.area = row[2]
+            property.property_history=row[3]
+            property.owner_id = row[4]
+        else:
+            # not in dictionary, create new instance and add to dictionary
+            property = cls(row[1], row[2], row[3], row[4])
+            property.id = row[0]
+            cls.all[property.id] = property
+        return property
+
+    @classmethod
+    def get_all(cls):
+        """Return a list containing one property object per table row"""
+        sql = """
+            SELECT *
+            FROM properties
+        """
+
+        rows = CURSOR.execute(sql).fetchall()
+
+        return [cls.instance_from_db(row) for row in rows]
+
+    @classmethod
+    def find_by_id(cls, id):
+        """Return Properties object corresponding to the table row matching the specified primary key"""
+        sql = """
+            SELECT *
+            FROM properties
+            WHERE id = ?
+        """
+
+        row = CURSOR.execute(sql, (id,)).fetchone()
+        return cls.instance_from_db(row) if row else None
+
+    @classmethod
+    def find_by_name(cls, name):
+        """Return Properties object corresponding to first table row matching specified name"""
+        sql = """
+            SELECT *
+            FROM properties
+            WHERE name is ?
+        """
+
+        row = CURSOR.execute(sql, (name,)).fetchone()
+        return cls.instance_from_db(row) if row else None
+
 
 
 
