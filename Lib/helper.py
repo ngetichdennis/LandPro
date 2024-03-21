@@ -4,7 +4,7 @@ from models.property import Property
 def add_owner():
     name = input("Enter owner's name: ")
     contact = input("Enter owner's contact: ")
-    identification_no=input("Enter owner's identification_no")
+    identification_no=input("Enter owner's identification_no:")
     try:
         new_owner = Owner.create(name,contact,identification_no)
         print(f"Owner added successfully:{new_owner}")

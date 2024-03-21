@@ -144,6 +144,19 @@ class Property:
 
         row = CURSOR.execute(sql, (name,)).fetchone()
         return cls.instance_from_db(row) if row else None
+    
+    @classmethod
+    def find_by_owner_id(cls, owner_id):
+        """Return a list of properties owned by the specified owner ID."""
+        sql = """
+            SELECT *
+            FROM properties
+            WHERE owner_id = ?
+        """
+
+        rows = CURSOR.execute(sql, (owner_id,)).fetchall()
+
+        return [cls.instance_from_db(row) for row in rows]
 
 
 
