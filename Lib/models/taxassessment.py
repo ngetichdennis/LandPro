@@ -36,3 +36,41 @@ class TaxAssessment:
         """
         CURSOR.execute(sql)
         CONN.commit()
+        
+    @classmethod
+    def create(cls, property_id, owner_id, assessment_date, assessed_value, tax_rates, payment_status):
+        """Create a new tax assessment entry in the database."""
+        sql = """
+            INSERT INTO tax_assessments (property_id, owner_id, assessment_date, assessed_value, tax_rates, payment_status)
+            VALUES (?, ?, ?, ?, ?, ?)
+        """
+        CURSOR.execute(sql, (property_id, owner_id, assessment_date, assessed_value, tax_rates, payment_status))
+        CONN.commit()
+
+        tax_assessment_id = CURSOR.lastrowid
+        return cls(property_id, owner_id, assessment_date, assessed_value, tax_rates, payment_status, id=tax_assessment_id)
+
+    @classmethod
+    def get_all(cls):
+        """Retrieve all tax assessments from the database."""
+        sql = """
+            SELECT * FROM tax_assessments
+        """
+        CURSOR.execute(sql)
+        rows = CURSOR.fetchall()
+        return [cls.instance_from_db(row) for row in rows]
+
+    @classmethod
+    def instance_from_db(cls, row):
+        """Create a TaxAssessment instance from a database row."""
+        return cls(*row)
+
+    @classmethod
+    def find_by_id(cls, id):
+        """Find a tax assessment by its ID."""
+        sql = """
+            SELECT * FROM tax_assessments WHERE id = ?
+        """
+        CURSOR.execute(sql, (id,))
+        row = CURSOR.fetchone()
+        return cls.instance_from_db(row) if row else None
