@@ -14,6 +14,10 @@ class Property:
         self.property_history=property_history
         self.owner_id = owner_id
         
+    def __str__(self):
+        return f"(Property location is {self.location} has an area of {self.area} square Metres.The property has{self.property_history} history and it is owned by {self.owner_id})"
+
+        
     @classmethod
     def create_table(cls):
         """ Create a new table to persist the attributes of property instances """
@@ -132,6 +136,18 @@ class Property:
 
         row = CURSOR.execute(sql, (id,)).fetchone()
         return cls.instance_from_db(row) if row else None
+    @classmethod
+    def find_by_location(cls, location):
+        """Return Properties object corresponding to the table row matching the specified primary key"""
+        sql = """
+            SELECT *
+            FROM properties
+            WHERE location = ?
+        """
+
+        row = CURSOR.execute(sql, (location,)).fetchone()
+        return cls.instance_from_db(row) if row else None
+    
 
     @classmethod
     def find_by_name(cls, name):

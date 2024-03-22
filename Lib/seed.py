@@ -12,7 +12,10 @@ def seed_database():
     Property.create_table()
     Property.create(location="123 Main St", area=1000, property_history="Good condition", owner_id=1)
     Property.create(location="456 Elm St", area=1500, property_history="Needs renovation", owner_id=2)
-
+ # Create tax assessments
+    TaxAssessment.create_table()
+    TaxAssessment.create(property_id=1, owner_id=1, assessment_date="2024-03-22", assessed_value=100000, tax_rates=0.05, payment_status="Paid")
+    TaxAssessment.create(property_id=2, owner_id=2, assessment_date="2024-03-22", assessed_value=150000, tax_rates=0.06, payment_status="Not Paid")
     print("Database seeded successfully.")
 
 if __name__ == "__main__":

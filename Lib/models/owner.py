@@ -11,6 +11,9 @@ class Owner:
         self.name = name
         self.contact=contact
         self.identification_no=identification_no
+        
+    def __str__(self):
+        return f"(Owner: {self.name}  - Contact: {self.contact}  ID:{self.identification_no})"
 
 
     @classmethod

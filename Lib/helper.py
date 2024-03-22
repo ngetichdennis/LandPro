@@ -36,7 +36,7 @@ def list_all_properties():
             owner_name = owner.name
         else:
             owner_name = "Unknown Owner"
-        print(f"{property.id}: {property.location} {property.area} {property.property_history}  {owner_name}")
+        print(f"{property.id}. Property Location:{property.location} Property area:{property.area} Property History {property.property_history}  Property Owner{owner_name}")
 def find_owner_by_name():
     name = input("Enter the owner's name: ")
     owner = Owner.find_by_name(name)
@@ -116,7 +116,7 @@ def find_properties_by_owner_name():
         if properties:
             print(f"Properties owned by {owner_name}:")
             for prop in properties:
-                print(f"{prop.location}, {prop.area} square meters, Property History: {prop.property_history}")
+                print(f"Property Location:{prop.location}, {prop.area} square meters, Property History: {prop.property_history}")
         else:
             print(f"No properties found for {owner_name}.")
     else:
