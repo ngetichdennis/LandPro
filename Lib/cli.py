@@ -1,11 +1,13 @@
-from helper import add_owner, add_property, list_all_owners, list_all_properties, find_owner_by_name,find_property_by_name,find_owner_by_id,find_property_by_id,update_owner, update_property,delete_owner, delete_property,find_properties_by_owner_name
+from helper import add_owner, add_property, list_all_owners, list_all_properties, find_owner_by_name,find_property_by_name,find_owner_by_id,find_property_by_id,update_owner, update_property,delete_owner,delete_property,find_properties_by_owner_name,find_taxassessment_by_id,list_all_taxassessment,add_taxassessment,delete_taxassessment,update_taxassessment
+
 
 def display_menu():
     print("\nWelcome to LandPro, a Property Management System")
     print("1. Manage Owners")
     print("2. Manage Properties")
     print("3. Find Information")
-    print("4. Exit")
+    print("4. Tax assessment Manager")
+    print("5. Exit")
 
 def display_owner_menu():
     print("\nManage Owners")
@@ -22,7 +24,14 @@ def display_property_menu():
     print("3. Update Property")
     print("4. Delete Property")
     print("5. Return to main menu")
-
+    
+def display_taxassessment_menu():
+    print("\nTax Assessment Manager\n")
+    print("1. List All Taxassessment information")
+    print("2. Add Tax assessment information.")
+    print("3. Update Tax assessment information.")
+    print("4. Remove Tax assessment information")
+    print("5. Return to Main Menu.")
 def display_find_menu():
     print("\nFind Information")
     print("1. Find Owner by name")
@@ -30,7 +39,8 @@ def display_find_menu():
     print("3. Find Owner by ID")
     print("4. Find Property by ID")
     print("5. Find properties owned by an owner")
-    print("6. Return to main menu")
+    print("6.Find Tax Assessment by ID")
+    print("7. Return to main menu")
 
 def main():
     while True:
@@ -82,11 +92,29 @@ def main():
                     find_property_by_id()
                 elif find_choice == "5":
                     find_properties_by_owner_name()
-                elif find_choice == "6":
+                elif find_choice=="6":
+                    find_taxassessment_by_id()
+                elif find_choice == "7":
                     break
                 else:
                     print("Invalid choice. Please enter a number between 1 and 6.")
-        elif choice == "4":
+        elif choice =="4":
+            while True:
+                display_taxassessment_menu()
+                taxassessment_choice=input("Enter your choice: ")
+                if taxassessment_choice=="1":
+                    list_all_taxassessment()
+                elif taxassessment_choice=="2":
+                    add_taxassessment()
+                elif taxassessment_choice=="3":
+                    update_taxassessment()
+                elif taxassessment_choice=="4":
+                    delete_taxassessment()
+                elif taxassessment_choice=="5":
+                    break
+                else:
+                    ("Invalid Choice.The value shoulf range from 1 to 5")
+        elif choice == "5":
             print("Exiting...")
             break
         else:

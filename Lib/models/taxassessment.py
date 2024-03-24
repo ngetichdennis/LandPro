@@ -63,7 +63,23 @@ class TaxAssessment:
     @classmethod
     def instance_from_db(cls, row):
         """Create a TaxAssessment instance from a database row."""
-        return cls(*row)
+        # Check the dictionary for  existing instance using the row's primary key
+        taxassessment = cls.all.get(row[0])
+        if taxassessment:
+            # ensure attributes match row values in case local instance was modified
+            taxassessment.property_id = row[1]
+            taxassessment.owner_id = row[2]
+            taxassessment.assessment_date=row[3]
+            taxassessment.assessed_value = row[4]
+            taxassessment.tax_rates = row[5]
+            taxassessment.payment_status = row[6]
+            
+        else:
+            # not in dictionary, create new instance and add to dictionary
+            taxassessment = cls(row[1], row[2], row[3], row[4],row[5],row[6])
+            taxassessment.id = row[0]
+            cls.all[taxassessment.id] = taxassessment
+        return taxassessment
 
     @classmethod
     def find_by_id(cls, id):
