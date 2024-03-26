@@ -5,8 +5,8 @@ def display_menu():
     print("\nWelcome to LandPro, a Property Management System")
     print("1. Manage Owners")
     print("2. Manage Properties")
-    print("3. Find Information")
-    print("4. Tax assessment Manager")
+    print("3. Tax assessment Manager")
+    print("4. Find Information")
     print("5. Exit")
 
 def display_owner_menu():
@@ -78,7 +78,25 @@ def main():
                     break
                 else:
                     print("Invalid choice. Please enter a number between 1 and 5.")
-        elif choice == "3":
+        
+        elif choice =="3":
+            while True:
+                display_taxassessment_menu()
+                taxassessment_choice=input("Enter your choice: ")
+                if taxassessment_choice=="1":
+                    list_all_taxassessment()
+                elif taxassessment_choice=="2":
+                    add_taxassessment()
+                elif taxassessment_choice=="3":
+                    update_taxassessment()
+                elif taxassessment_choice=="4":
+                    delete_taxassessment()
+                elif taxassessment_choice=="5":
+                    break
+                else:
+                    ("Invalid Choice.The value shoulf range from 1 to 5")
+                    
+        elif choice == "4":
             while True:
                 display_find_menu()
                 find_choice = input("Enter your choice: ")
@@ -98,22 +116,6 @@ def main():
                     break
                 else:
                     print("Invalid choice. Please enter a number between 1 and 6.")
-        elif choice =="4":
-            while True:
-                display_taxassessment_menu()
-                taxassessment_choice=input("Enter your choice: ")
-                if taxassessment_choice=="1":
-                    list_all_taxassessment()
-                elif taxassessment_choice=="2":
-                    add_taxassessment()
-                elif taxassessment_choice=="3":
-                    update_taxassessment()
-                elif taxassessment_choice=="4":
-                    delete_taxassessment()
-                elif taxassessment_choice=="5":
-                    break
-                else:
-                    ("Invalid Choice.The value shoulf range from 1 to 5")
         elif choice == "5":
             print("Exiting...")
             break

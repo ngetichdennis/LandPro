@@ -65,7 +65,7 @@ class Property:
             WHERE id = ?
         """
         CURSOR.execute(sql, (self.location, self.area,self.property_history,
-                             self.owner_id, self.id))
+                            self.owner_id, self.id))
         CONN.commit()
 
     def delete(self):
