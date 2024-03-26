@@ -35,12 +35,11 @@ def display_taxassessment_menu():
 def display_find_menu():
     print("\nFind Information")
     print("1. Find Owner by name")
-    print("2. Find Property by name")
-    print("3. Find Owner by ID")
-    print("4. Find Property by ID")
-    print("5. Find properties owned by an owner")
-    print("6.Find Tax Assessment by ID")
-    print("7. Return to main menu")
+    print("2. Find Owner by ID")
+    print("3. Find Property by ID")
+    print("4. Find properties owned by an owner")
+    print("5.Find Tax Assessment by ID")
+    print("6. Return to main menu")
 
 def main():
     while True:
@@ -103,16 +102,14 @@ def main():
                 if find_choice == "1":
                     find_owner_by_name()
                 elif find_choice == "2":
-                    find_property_by_name()
-                elif find_choice == "3":
                     find_owner_by_id()
-                elif find_choice == "4":
+                elif find_choice == "3":
                     find_property_by_id()
-                elif find_choice == "5":
+                elif find_choice == "4":
                     find_properties_by_owner_name()
-                elif find_choice=="6":
+                elif find_choice=="5":
                     find_taxassessment_by_id()
-                elif find_choice == "7":
+                elif find_choice == "6":
                     break
                 else:
                     print("Invalid choice. Please enter a number between 1 and 6.")
