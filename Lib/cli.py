@@ -37,7 +37,7 @@ def display_find_menu():
     print("1. Find Owner by name")
     print("2. Find Owner by ID")
     print("3. Find Property by ID")
-    print("4. Find properties owned by an owner")
+    print("4. Find properties owned by a  specific owner")
     print("5.Find Tax Assessment by ID")
     print("6. Return to main menu")
 
